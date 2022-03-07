@@ -1,0 +1,11 @@
+.navbar__container {
+  background-color: lightgray;
+  position: relative;
+  height: 100px;
+  width: 100%;
+  margin: 0;
+}
+
+.navbar__container p {
+  margin: 0;
+}
