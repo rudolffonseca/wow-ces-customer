@@ -28,7 +28,11 @@ export const MessageForm: FC = () => {
           <br />
           <Form.Label>Upload your files: </Form.Label>
           <br />
-          <Form.Control type="file" className="border--rounded"></Form.Control>
+          <Form.Control
+            type="file"
+            multiple
+            className="border--rounded"
+          ></Form.Control>
           <br />
         </Form.Group>
         <Button variant="primary" type="submit" className="border--rounded">

@@ -1,14 +1,23 @@
 import React from "react";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { MessageForm } from "./components/MessageForm";
-import ProductsFrame from "./components/ProductsFrame";
+import NavBar from "./components/NavBar";
+import { Home } from "./pages/Home";
+import { Login } from "./pages/Login";
+import { SignUp } from "./pages/SignUp/SignUp";
 
 function App() {
   return (
     <div className="App">
-      <p>CUSTOMER PAGE</p>
-      <MessageForm />
-      <ProductsFrame />
+      <NavBar />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/customer" element={<MessageForm />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+      </Routes>
     </div>
   );
 }

@@ -1,0 +1,13 @@
+.signup__container {
+  background-color: lightcyan;
+  padding: 20px;
+  margin: 15vh auto;
+  border: 3px solid gray;
+  border-radius: 20px;
+  min-width: 200px;
+  max-width: 600px;
+}
+
+.border--rounded {
+  border-radius: 20px;
+}

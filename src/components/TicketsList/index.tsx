@@ -1,9 +1,10 @@
-import "./ProductsFrame.css";
+import { FC } from "react";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
+import "./style.css";
 
-export const ProductsFrame = () => {
+export const TicketsList: FC = () => {
   return (
-    <div className="productsFrame__container">
+    <div className="ticketsList__container">
       <div
         style={{
           position: "sticky",
@@ -27,5 +28,3 @@ export const ProductsFrame = () => {
     </div>
   );
 };
-
-export default ProductsFrame;

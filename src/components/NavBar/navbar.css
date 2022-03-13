@@ -9,3 +9,11 @@
 .navbar__container p {
   margin: 0;
 }
+
+.nav_link--text {
+  color: #a9c7ff;
+}
+
+.nav_link--text:hover {
+  color: white;
+}
