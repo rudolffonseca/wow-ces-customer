@@ -18,6 +18,7 @@ export const NavBar: FC = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
+            {token ? <Nav.Link href="/dashboard">Dashboard</Nav.Link> : <></>}
           </Nav>
           {changeButton}
         </Navbar.Collapse>

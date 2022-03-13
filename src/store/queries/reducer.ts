@@ -3,6 +3,7 @@ import * as actionTypes from "./actionTypes";
 
 const initialState: QueriesState = {
   countries: null,
+  tickets: null,
 };
 
 export const reducer = (
@@ -12,7 +13,8 @@ export const reducer = (
   switch (action.type) {
     case actionTypes.COUNTRIES:
       return { ...state, countries: action.payload.countries };
-
+    case actionTypes.TICKETS:
+      return { ...state, tickets: action.payload.tickets };
     default:
       return state;
   }

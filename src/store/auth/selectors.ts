@@ -8,10 +8,14 @@ export const hasToken = (state: any) => {
 };
 
 //return email from the store.
-export const getEmail = (state: any): string => {
+export const getEmail = (state: any) => {
   return state.authStore.email;
 };
 
-export const getMessage = (state: any): string => {
+export const getMessage = (state: any) => {
   return state.authStore.message;
+};
+
+export const getCustomerId = (state: any) => {
+  return state.authStore.userId;
 };
