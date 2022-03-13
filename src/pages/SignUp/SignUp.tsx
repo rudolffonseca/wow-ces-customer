@@ -81,11 +81,13 @@ export const SignUp: FC = () => {
               <option disabled hidden value="">
                 Select a country
               </option>
-              {countries.map((country: Country) => (
-                <option key={country.id} value={country.id}>
-                  {country.name}
-                </option>
-              ))}
+              {countries
+                .sort((a, b) => (a.name >= b.name ? 1 : -1))
+                .map((country: Country) => (
+                  <option key={country.id} value={country.id}>
+                    {country.name}
+                  </option>
+                ))}
             </Form.Select>
           </Form.Group>
 
