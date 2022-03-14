@@ -45,7 +45,7 @@ export function setMessage(message: string | null) {
 export function authentication(email: string, password: string) {
   return async (dispatch: Dispatch<Action>) => {
     try {
-      const response = await axios.post(URL + "login", {
+      const response = await axios.post(URL + "auth/login", {
         email,
         password,
       });
@@ -62,6 +62,7 @@ export function authentication(email: string, password: string) {
   };
 }
 
+//TODO: change to express endpoint
 export function registration(newCustomer: Customer) {
   return async (dispatch: Dispatch<Action>) => {
     try {
