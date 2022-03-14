@@ -45,16 +45,13 @@ export function setMessage(message: string | null) {
 export function authentication(email: string, password: string) {
   return async (dispatch: Dispatch<Action>) => {
     try {
-      const response = await axios.post(URL + "graphql", {
-        query: print(LOGIN_DATA),
-        variables: {
-          email,
-          password,
-        },
+      const response = await axios.post(URL + "login", {
+        email,
+        password,
       });
       const data: AuthState = {
-        token: response.data.data.login.token,
-        userId: response.data.data.login.customer.id,
+        token: response.data.token,
+        userId: response.data.id,
         email,
         message: "Login successful!",
       };
