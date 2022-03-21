@@ -1,5 +1,5 @@
 export interface Message {
-  id: string;
+  id: string | null;
   message: string;
   read: boolean;
   authorCustomer: boolean;

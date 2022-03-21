@@ -7,8 +7,6 @@ type Props = {
 };
 
 export const MessagesList: FC<Props> = ({ messages }: Props) => {
-  console.log(messages);
-
   const handleAuthor = (author: boolean): string => {
     switch (author) {
       case true:

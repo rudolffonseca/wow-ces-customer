@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { TicketsList } from "../../components/TicketsList";
 import { getCustomerId, hasToken } from "../../store/auth/selectors";
+import loading from "../../images/loading.gif";
 
 export const Dashboard: FC = () => {
   const navigate = useNavigate();
@@ -16,7 +17,9 @@ export const Dashboard: FC = () => {
   });
 
   return !token ? (
-    <></>
+    <>
+      <img src={loading} alt="loading" />
+    </>
   ) : (
     //FIXME: vulnerability: you can put any other id and access someone else data
     <div>

@@ -41,3 +41,25 @@ export const MESSAGES_BY_TICKET = gql`
     }
   }
 `;
+
+export const ADD_MESSAGE = gql`
+  mutation (
+    $message: String!
+    $authorCust: Boolean
+    $ticketId: ID
+    $read: Boolean
+  ) {
+    addMessage(
+      message: $message
+      authorCust: $authorCust
+      ticket_id: $ticketId
+      read: $read
+    ) {
+      id
+      message
+      read
+      authorCustomer
+      createdAt
+    }
+  }
+`;

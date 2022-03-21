@@ -1,0 +1,7 @@
+.new_message__container {
+  margin: 20px;
+  width: 400px;
+  padding: 10px;
+  max-height: 80vh;
+  border-radius: 5px;
+}

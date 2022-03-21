@@ -7,6 +7,7 @@ import { QueriesAction } from "./type";
 import { Ticket } from "../../models/Ticket";
 import { Message } from "../../models/Message";
 import {
+  ADD_MESSAGE,
   COUNTRY_QUERY,
   MESSAGES_BY_TICKET,
   TICKET_BY_CUSTOMER,
@@ -107,3 +108,21 @@ export const messagesByTicket = (ticket_id: string) => {
     }
   };
 };
+
+export const addNewMessage =
+  (message: Message, ticket_id: string) => async (dispatch: Dispatch<any>) => {
+    try {
+      const response = await axios.post(URL + "graphql", {
+        query: print(ADD_MESSAGE),
+        variables: {
+          message: message.message,
+          authorCust: message.authorCustomer,
+          ticketId: ticket_id,
+          read: message.read,
+        },
+      });
+      dispatch(messagesByTicket(ticket_id));
+    } catch (error) {
+      console.log((error as Error).message);
+    }
+  };

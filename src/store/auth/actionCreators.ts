@@ -5,7 +5,7 @@ import { Action, Dispatch } from "redux";
 import { Customer } from "../../models/Customer";
 
 const { URL } = require("../url");
-const { LOGIN_DATA, NEW_CUSTOMER } = require("./gqlQuery");
+const { NEW_CUSTOMER } = require("./gqlQuery");
 
 export function login(data: AuthState) {
   const action: AuthAction = {
