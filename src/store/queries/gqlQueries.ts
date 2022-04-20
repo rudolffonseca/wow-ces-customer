@@ -1,5 +1,16 @@
 import gql from "graphql-tag";
 
+export const TOPIC_QUERY = gql`
+  query {
+    getTopics {
+      id
+      title
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
 export const COUNTRY_QUERY = gql`
   query Countries {
     countries {
