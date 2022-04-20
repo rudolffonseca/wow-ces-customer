@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ import { registration } from "../../store/auth/actionCreators";
 import { getMessage, hasToken } from "../../store/auth/selectors";
 import { queryCountries } from "../../store/queries/actionCreators";
 import { getCountries } from "../../store/queries/selectors";
+import loading from "../../images/loading.gif";
 import "./style.css";
 
 export const SignUp: FC = () => {
@@ -41,7 +42,7 @@ export const SignUp: FC = () => {
   );
 
   // FIXME: couldn't find a type for the event.
-  const handleSubmit = (e: any): void => {
+  const handleSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
     if (!country || password !== confirmPassword) {
       console.log("something wrong");
@@ -59,7 +60,9 @@ export const SignUp: FC = () => {
   };
 
   return !countries ? (
-    <></>
+    <>
+      <img src={loading} alt="loading" />
+    </>
   ) : (
     <div>
       {messageBox}

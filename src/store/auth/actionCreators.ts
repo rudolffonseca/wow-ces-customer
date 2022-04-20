@@ -66,19 +66,14 @@ export function authentication(email: string, password: string) {
 export function registration(newCustomer: Customer) {
   return async (dispatch: Dispatch<Action>) => {
     try {
-      const response = await axios.post(URL + "graphql", {
-        query: print(NEW_CUSTOMER),
-        variables: {
-          name: newCustomer.name,
-          email: newCustomer.email,
-          countryId: newCustomer.country,
-          password: newCustomer.password,
-        },
+      const response = await axios.post(URL + "signup", {
+        name: newCustomer.name,
+        email: newCustomer.email,
+        country_id: newCustomer.country,
+        password: newCustomer.password,
       });
-      const errorMessage = response.data.errors; //.errors[0].message;
-      if (errorMessage) {
-        dispatch(setMessage(errorMessage[0].message));
-      } else {
+
+      if (response.data) {
         dispatch(setMessage("You're signed up!"));
       }
       // FIXME: the server is throwing the error but axios is not catching it

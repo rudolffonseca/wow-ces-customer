@@ -53,12 +53,8 @@ export const setMessages = (messages: Message[]) => {
 // query for the list of countries on the signup page
 export const queryCountries = () => async (dispatch: Dispatch<Action>) => {
   try {
-    // const response = await axios.get(URL + "countries");
-    // const countries = response.data;
-    const response = await axios.post(URL + "graphql", {
-      query: print(COUNTRY_QUERY),
-    });
-    const countries: Country[] = response.data.data.countries;
+    const response = await axios.get(URL + "countries");
+    const countries = response.data;
     dispatch(setCountries(countries));
   } catch (error) {
     console.log((error as Error).message);
@@ -67,14 +63,23 @@ export const queryCountries = () => async (dispatch: Dispatch<Action>) => {
 };
 
 export const ticketByCustomer =
-  (id: string) => async (dispatch: Dispatch<Action>) => {
+  (id: string) => async (dispatch: Dispatch<Action>, getState: any) => {
+    const token: string = getState().authStore.token;
     try {
-      const response = await axios.post(URL + "graphql", {
-        query: print(TICKET_BY_CUSTOMER),
-        variables: {
-          custId: id,
+      const response = await axios.post(
+        URL + "graphql",
+        {
+          query: print(TICKET_BY_CUSTOMER),
+          variables: {
+            custId: id,
+          },
         },
-      });
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       const ticketsList = response.data.data.ticketsByCustomer.map(
         (ticket: {
           id: string;
@@ -93,14 +98,23 @@ export const ticketByCustomer =
   };
 
 export const messagesByTicket = (ticket_id: string) => {
-  return async (dispatch: Dispatch<Action>) => {
+  return async (dispatch: Dispatch<Action>, getState: any) => {
+    const token: string = getState().authStore.token;
     try {
-      const response = await axios.post(URL + "graphql", {
-        query: print(MESSAGES_BY_TICKET),
-        variables: {
-          ticketId: ticket_id,
+      const response = await axios.post(
+        URL + "graphql",
+        {
+          query: print(MESSAGES_BY_TICKET),
+          variables: {
+            ticketId: ticket_id,
+          },
         },
-      });
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       const messages = response.data.data.messagesByTicket;
       dispatch(setMessages(messages));
     } catch (error) {
@@ -110,19 +124,35 @@ export const messagesByTicket = (ticket_id: string) => {
 };
 
 export const addNewMessage =
-  (message: Message, ticket_id: string) => async (dispatch: Dispatch<any>) => {
+  (message: Message, ticket_id: string) =>
+  async (dispatch: Dispatch<any>, getState: any) => {
+    const token: string = getState().authStore.token;
     try {
-      const response = await axios.post(URL + "graphql", {
-        query: print(ADD_MESSAGE),
-        variables: {
-          message: message.message,
-          authorCust: message.authorCustomer,
-          ticketId: ticket_id,
-          read: message.read,
+      const response = await axios.post(
+        URL + "graphql",
+        {
+          query: print(ADD_MESSAGE),
+          variables: {
+            message: message.message,
+            authorCust: message.authorCustomer,
+            ticketId: ticket_id,
+            read: message.read,
+          },
         },
-      });
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       dispatch(messagesByTicket(ticket_id));
     } catch (error) {
       console.log((error as Error).message);
     }
+  };
+
+export const addNewTicket =
+  (product_id: string, topic_id: string, status_id: string) =>
+  async (dispatch: Dispatch<any>, getState: any) => {
+    const customer_id: string = getState().authStore.userId;
   };

@@ -15,7 +15,7 @@ export const Home: FC = () => {
     <div>
       <h1 className="home-page-heading">WOW! Customer Experience</h1>
       <h3 className="home-description">
-        Our service use the following technologies:
+        Our service uses the following technologies:
       </h3>
       <div className="logo-wrapper">
         <img src={react_logo} alt="react" width={100} className="home-logo" />
@@ -42,6 +42,14 @@ export const Home: FC = () => {
         <img src={axios_logo} alt="redux" width={100} className="home-logo" />
         <img src={apollo_logo} alt="redux" width={100} className="home-logo" />
       </div>
+      <h3 className="mission-description">Our mission is... </h3>
+      <p className="mission-description">
+        <em>
+          to give to your company the necessary tools to provide a "Wow"
+          experience in Customer Service and generate Data in order to identify
+          early stage issues and opportunities.
+        </em>
+      </p>
       <div className="image-wrapper">
         <img src={ce_image} alt="customer_service" className="image-1" />
         <img src={ce_image} alt="customer_service" className="image-2" />

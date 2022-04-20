@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Ticket } from "../../models/Ticket";
 import { ticketByCustomer } from "../../store/queries/actionCreators";
 import { getTickets } from "../../store/queries/selectors";
+import loading from "../../images/loading.gif";
 import "./style.css";
 
 interface Props {
@@ -24,8 +25,12 @@ export const TicketsList: FC<Props> = ({ user_id }: Props) => {
   const handleStatus = (status: string) => {
     switch (status) {
       case "on queue":
-        return "secondary";
+        return "danger";
       case "open":
+        return "success";
+      case "on hold":
+        return "warning";
+      case "closed":
         return "primary";
       default:
         return "light";
@@ -33,7 +38,9 @@ export const TicketsList: FC<Props> = ({ user_id }: Props) => {
   };
 
   return !tickets ? (
-    <></>
+    <>
+      <img src={loading} alt="loading" className="loading" />
+    </>
   ) : (
     <div className="ticketsList__container">
       <Table striped hover>

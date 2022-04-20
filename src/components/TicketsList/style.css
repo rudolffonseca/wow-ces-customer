@@ -5,3 +5,8 @@
   width: 600px;
   overflow-x: hidden;
 }
+
+.loading {
+  display: block;
+  margin: 30vh auto;
+}
