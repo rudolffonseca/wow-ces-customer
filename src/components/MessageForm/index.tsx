@@ -1,21 +1,32 @@
+import axios from "axios";
 import { FC, useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import Product from "../../models/Product";
 import { Topic } from "../../models/Topics";
-import { queryTopics } from "../../store/queries/actionCreators";
-import { getTopics } from "../../store/queries/selectors";
+import {
+  addNewTicket,
+  queryProducts,
+  queryTopics,
+} from "../../store/queries/actionCreators";
+import { getProducts, getTopics } from "../../store/queries/selectors";
+import { URL } from "../../store/url";
 import "./messageForm.css";
 
 export const MessageForm: FC = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [files, setFiles] = useState<Array<string | undefined>>([]);
   const topics: Topic[] = useSelector(getTopics);
-  console.log("topics:", topics);
+  const products: Product[] = useSelector(getProducts);
 
   useEffect(() => {
     dispatch(queryTopics());
+    dispatch(queryProducts());
   }, [dispatch]);
 
+  //return an array of files name to files variable
   const handleUpload = (event: any): void => {
     event.preventDefault();
     const filesList: FileList = event.target.files;
@@ -32,9 +43,11 @@ export const MessageForm: FC = () => {
     event.preventDefault();
     const { topic, product, message } = event.target;
     console.log("SubmitEvent: ", topic.value, product.value, message.value);
+    dispatch(addNewTicket(product.value, topic.value, message.value));
+    navigate("/dashboard");
   };
 
-  return !topics ? (
+  return !topics || !products ? (
     <div>Loading...</div>
   ) : (
     <div className="messageForm__container">
@@ -46,7 +59,10 @@ export const MessageForm: FC = () => {
       >
         <Form.Group className="mb-3">
           <Form.Label htmlFor="topic">Topic: </Form.Label>
-          <Form.Select name="topic" className="border--rounded">
+          <Form.Select name="topic" className="border--rounded" required>
+            <option value="" disabled>
+              Choose a topic...
+            </option>
             {topics.map((topic) => (
               <option key={topic.id} value={topic.id}>
                 {topic.title}
@@ -56,9 +72,14 @@ export const MessageForm: FC = () => {
           <br />
           <Form.Label htmlFor="product">Product: </Form.Label>
           <Form.Select name="product" className="border--rounded">
-            <option>Product 1</option>
-            <option>Product 2</option>
-            <option>Product 3</option>
+            <option value="" disabled>
+              Choose a product...
+            </option>
+            {products.map((product) => (
+              <option key={product.id} value={product.id}>
+                {product.name}
+              </option>
+            ))}
           </Form.Select>
           <br />
           <br />
@@ -67,6 +88,8 @@ export const MessageForm: FC = () => {
             as="textarea"
             name="message"
             className="border--rounded"
+            placeholder="Write your message here..."
+            required
           />
           <br />
           <Form.Label>Upload your files: </Form.Label>

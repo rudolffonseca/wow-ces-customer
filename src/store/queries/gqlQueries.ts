@@ -1,5 +1,17 @@
 import gql from "graphql-tag";
 
+export const PRODUCTS_QUERY = gql`
+  query {
+    getProducts {
+      id
+      name
+      serial
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
 export const TOPIC_QUERY = gql`
   query {
     getTopics {
@@ -71,6 +83,19 @@ export const ADD_MESSAGE = gql`
       read
       authorCustomer
       createdAt
+    }
+  }
+`;
+
+export const ADD_TICKET = gql`
+  mutation ($customerId: ID, $productId: ID, $topicId: ID, $message: String) {
+    newTicket(
+      customer_id: $customerId
+      product_id: $productId
+      topic_id: $topicId
+      message: $message
+    ) {
+      id
     }
   }
 `;

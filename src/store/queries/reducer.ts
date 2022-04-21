@@ -4,6 +4,7 @@ import * as actionTypes from "./actionTypes";
 const initialState: QueriesState = {
   countries: null,
   topics: null,
+  products: null,
   tickets: null,
   messages: null,
 };
@@ -21,6 +22,8 @@ export const reducer = (
       return { ...state, messages: action.payload.messages };
     case actionTypes.TOPICS:
       return { ...state, topics: action.payload.topics };
+    case actionTypes.PRODUCTS:
+      return { ...state, products: action.payload.products };
     default:
       return state;
   }
